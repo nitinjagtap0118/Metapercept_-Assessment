@@ -1,0 +1,28 @@
+public class maximumNumberInJaggedArray {
+    public static void main(String[] args) {
+        Object[] jaggedArray = {2, 4, 10, new Object[]{12, 4, new Object[]{100, 99}, 4}, new Object[]{3, 2, 99}, 0};
+
+        int maxNumber = findMaxNumber(jaggedArray);
+
+        System.out.println("Maximum number: " + maxNumber);
+    }
+
+    private static int findMaxNumber(Object[] array) {
+        int maxNumber = Integer.MIN_VALUE;
+
+        for (Object element : array) {
+            if (element instanceof Integer) {
+                // If the element is an integer, compare it with the current maxNumber
+                int number = (int) element;
+                maxNumber = Math.max(maxNumber, number);
+            } else if (element instanceof Object[]) {
+                // If the element is an array, recursively call the function
+                int maxInSubArray = findMaxNumber((Object[]) element);
+                maxNumber = Math.max(maxNumber, maxInSubArray);
+            }
+            // Ignore other types of elements (e.g., nested arrays of numbers)
+        }
+
+        return maxNumber;
+    }
+}

@@ -1,0 +1,32 @@
+public class largeWord {
+    public static void main(String[] args) {
+        String inputString = "This is a sample string with some long words";
+
+        String longestWord = findLongestWord(inputString);
+
+        System.out.println("Longest word: " + longestWord);
+    }
+
+    private static String findLongestWord(String input) {
+        // Split the input string into words
+        String[] words = input.split("\\s+");
+
+        // Initialize variables to store the longest word and its length
+        String longestWord = "";
+        int maxLength = 0;
+
+        // Iterate through each word
+        for (String word : words) {
+            // Remove punctuation, if any (optional)
+            word = word.replaceAll("[^a-zA-Z]", "");
+
+            // Check if the current word is longer than the current longest word
+            if (word.length() > maxLength) {
+                maxLength = word.length();
+                longestWord = word;
+            }
+        }
+
+        return longestWord;
+    }
+}
